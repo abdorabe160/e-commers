@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe8dc"/><stop offset="1" stop-color="#e3d9c8"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8ccb7"/><stop offset="1" stop-color="#cfc1a9"/></linearGradient>
+    <radialGradient id="light" cx=".3" cy=".1" r=".9"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <path id="tee" d="M-48 0C-30 30 30 30 48 0L140 34 205 140 140 178 124 150V500H-124V150L-140 178-205 140-140 34Z"/>
+    <g id="hanger" fill="none" stroke="#2a2620" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 -36C0 -60 26 -60 26 -40C26 -26 0 -24 0 -8"/>
+      <path d="M0 -8L-150 40H150Z"/>
+    </g>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#wall)"/>
+  <rect y="850" width="1600" height="150" fill="url(#floor)"/>
+  <rect width="1600" height="1000" fill="url(#light)"/>
+
+  <!-- rail -->
+  <g stroke="#2a2620" stroke-linecap="round">
+    <path d="M330 220H1270" stroke-width="10"/>
+    <path d="M350 220V860M1250 220V860" stroke-width="10"/>
+    <path d="M300 860H400M1200 860H1300" stroke-width="12"/>
+  </g>
+  <ellipse cx="800" cy="872" rx="520" ry="16" fill="#8a7a60" opacity=".35" filter="url(#shadow)"/>
+
+  <!-- garments -->
+  <g transform="translate(570 260)">
+    <use href="#tee" fill="#6f5e48" opacity=".35" transform="translate(16 22)" filter="url(#shadow)"/>
+    <use href="#tee" fill="#1f1d1a"/>
+    <path d="M-60 180V470M50 220V470" stroke="#fff" stroke-opacity=".06" stroke-width="3"/>
+    <use href="#hanger" y="-2"/>
+  </g>
+  <g transform="translate(800 260)">
+    <use href="#tee" fill="#6f5e48" opacity=".35" transform="translate(16 22) scale(1 1.12)" filter="url(#shadow)"/>
+    <use href="#tee" fill="#c7b391" transform="scale(1 1.12)"/>
+    <path d="M-40 200V540M70 180V540" stroke="#fff" stroke-opacity=".18" stroke-width="3"/>
+    <rect x="-124" y="520" width="248" height="40" fill="#b9a37e"/>
+    <use href="#hanger" y="-2"/>
+  </g>
+  <g transform="translate(1030 260)">
+    <use href="#tee" fill="#6f5e48" opacity=".35" transform="translate(16 22) scale(.96)" filter="url(#shadow)"/>
+    <use href="#tee" fill="#56634a" transform="scale(.96)"/>
+    <path d="M-50 190V470M60 210V470" stroke="#fff" stroke-opacity=".07" stroke-width="3"/>
+    <use href="#hanger" y="-2"/>
+  </g>
+
+  <!-- folded stack -->
+  <g transform="translate(1340 760)">
+    <rect x="0" y="60" width="190" height="34" rx="6" fill="#1f1d1a"/>
+    <rect x="8" y="26" width="174" height="34" rx="6" fill="#c7b391"/>
+    <rect x="16" y="-8" width="158" height="34" rx="6" fill="#efe8dc" stroke="#d3c6b0" stroke-width="2"/>
+  </g>
+  <!-- tag -->
+  <g transform="translate(150 300) rotate(-6)">
+    <rect width="120" height="170" rx="10" fill="#fbf8f2" stroke="#d3c6b0" stroke-width="2"/>
+    <circle cx="60" cy="26" r="9" fill="none" stroke="#2a2620" stroke-width="4"/>
+    <rect x="26" y="70" width="68" height="10" rx="5" fill="#2a2620"/>
+    <rect x="36" y="94" width="48" height="8" rx="4" fill="#2a2620" opacity=".4"/>
+    <rect x="30" y="126" width="60" height="18" rx="9" fill="#56634a"/>
+  </g>
+  <path d="M210 300C230 230 300 220 330 222" fill="none" stroke="#2a2620" stroke-width="3"/>
+</svg>

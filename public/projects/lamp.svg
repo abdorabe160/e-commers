@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs>
+    <radialGradient id="bg" cx=".5" cy=".55" r=".75"><stop offset="0" stop-color="#3a2810"/><stop offset=".45" stop-color="#17110a"/><stop offset="1" stop-color="#090807"/></radialGradient>
+    <radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd98a" stop-opacity=".9"/><stop offset=".35" stop-color="#f0b452" stop-opacity=".35"/><stop offset="1" stop-color="#f0b452" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bulb" cx=".45" cy=".45" r=".6"><stop offset="0" stop-color="#fffdf4"/><stop offset=".35" stop-color="#ffefc2"/><stop offset=".8" stop-color="#f4c56a"/><stop offset="1" stop-color="#d9973a"/></radialGradient>
+    <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a4320"/><stop offset=".4" stop-color="#d6b26c"/><stop offset=".6" stop-color="#b08a45"/><stop offset="1" stop-color="#4a361a"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1c1813"/><stop offset=".45" stop-color="#3b3328"/><stop offset="1" stop-color="#14110d"/></linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="big" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="800" cy="560" r="460" fill="url(#halo)"/>
+
+  <!-- side pendants (off) -->
+  <g>
+    <path d="M360 0V300" stroke="#2c261e" stroke-width="4"/>
+    <path d="M300 300H420L470 400H250Z" fill="url(#shade)"/>
+    <path d="M250 400H470" stroke="#d6b26c" stroke-opacity=".45" stroke-width="3"/>
+    <ellipse cx="360" cy="402" rx="110" ry="10" fill="#f0b452" opacity=".25" filter="url(#glow)"/>
+  </g>
+  <g>
+    <path d="M1240 0V250" stroke="#2c261e" stroke-width="4"/>
+    <path d="M1180 250H1300L1350 350H1130Z" fill="url(#shade)"/>
+    <path d="M1130 350H1350" stroke="#d6b26c" stroke-opacity=".45" stroke-width="3"/>
+    <ellipse cx="1240" cy="352" rx="110" ry="10" fill="#f0b452" opacity=".25" filter="url(#glow)"/>
+  </g>
+
+  <!-- main lit bulb -->
+  <path d="M800 0V330" stroke="#3a3127" stroke-width="6"/>
+  <rect x="764" y="320" width="72" height="104" rx="10" fill="url(#bronze)"/>
+  <g stroke="#2a1e0e" stroke-opacity=".5" stroke-width="3"><path d="M764 350H836M764 372H836M764 394H836"/></g>
+  <circle cx="800" cy="580" r="190" fill="#ffcf73" opacity=".45" filter="url(#big)"/>
+  <path d="M752 424H848C848 470 940 488 940 580A140 140 0 1 1 660 580C660 488 752 470 752 424Z" fill="url(#bulb)" opacity=".96"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M776 430V520M824 430V520" stroke="#b07a2a" stroke-opacity=".6" stroke-width="3"/>
+    <path d="M776 520L788 548 800 520 812 548 824 520" stroke="#fff6d8" stroke-width="10" filter="url(#glow)"/>
+    <path d="M776 520L788 548 800 520 812 548 824 520" stroke="#fffdf4" stroke-width="4"/>
+  </g>
+  <path d="M716 520C700 560 700 610 720 650" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- table + reflection -->
+  <rect y="880" width="1600" height="120" fill="#0c0a08"/>
+  <path d="M0 880H1600" stroke="#d6b26c" stroke-opacity=".25" stroke-width="2"/>
+  <ellipse cx="800" cy="884" rx="420" ry="22" fill="#f0b452" opacity=".35" filter="url(#glow)"/>
+  <!-- small boxed bulb on table -->
+  <g transform="translate(1090 760)">
+    <rect width="150" height="120" rx="6" fill="#f3ede0"/>
+    <rect y="0" width="150" height="26" rx="6" fill="#d6b26c"/>
+    <circle cx="75" cy="72" r="24" fill="none" stroke="#8a6a2f" stroke-width="5"/>
+    <path d="M65 96H85" stroke="#8a6a2f" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

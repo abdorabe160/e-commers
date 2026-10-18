@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs>
+    <radialGradient id="bg" cx=".7" cy=".45" r=".9"><stop offset="0" stop-color="#1d2116"/><stop offset="1" stop-color="#0a0b08"/></radialGradient>
+    <linearGradient id="lime" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e4ff5c"/><stop offset="1" stop-color="#9bd40f"/></linearGradient>
+    <linearGradient id="jersey" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6ef"/><stop offset="1" stop-color="#cfd3c6"/></linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="28"/></filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="70"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <circle cx="1080" cy="470" r="300" fill="#c6f432" opacity=".18" filter="url(#glow)"/>
+
+  <!-- running track lanes -->
+  <g fill="none" stroke="#f4f6ef" stroke-opacity=".09" stroke-width="5">
+    <ellipse cx="1800" cy="1350" rx="1450" ry="760"/>
+    <ellipse cx="1800" cy="1350" rx="1330" ry="680"/>
+    <ellipse cx="1800" cy="1350" rx="1090" ry="520"/>
+    <ellipse cx="1800" cy="1350" rx="970" ry="440"/>
+  </g>
+  <ellipse cx="1800" cy="1350" rx="1210" ry="600" fill="none" stroke="url(#lime)" stroke-width="8"/>
+
+  <!-- speed stripes -->
+  <g transform="skewX(-22)">
+    <rect x="330" y="250" width="56" height="440" fill="url(#lime)"/>
+    <rect x="420" y="250" width="56" height="440" fill="#f4f6ef"/>
+    <rect x="510" y="250" width="56" height="440" fill="#f4f6ef" opacity=".25"/>
+  </g>
+  <g fill="#f4f6ef" opacity=".5">
+    <rect x="120" y="760" width="260" height="6" rx="3"/>
+    <rect x="200" y="790" width="180" height="6" rx="3" opacity=".6"/>
+  </g>
+
+  <!-- motion lines behind jersey -->
+  <g stroke="#c6f432" stroke-width="10" stroke-linecap="round" opacity=".8">
+    <path d="M700 380H800"/><path d="M660 470H790"/><path d="M720 560H800"/>
+  </g>
+
+  <!-- jersey -->
+  <g transform="translate(1080 230) rotate(8)">
+    <path transform="translate(14 30)" d="M-60 0C-40 34 40 34 60 0L170 40 250 170 170 214 152 182V610H-152V182L-170 214-250 170-170 40Z" fill="#000" opacity=".55" filter="url(#soft)"/>
+    <path d="M-60 0C-40 34 40 34 60 0L170 40 250 170 170 214 152 182V610H-152V182L-170 214-250 170-170 40Z" fill="url(#jersey)"/>
+    <path d="M-170 40L-250 170-170 214-152 182V120Z" fill="#14170f"/>
+    <path d="M170 40L250 170 170 214 152 182V120Z" fill="#14170f"/>
+    <path d="M-232 140L-196 160M232 140L196 160" stroke="#c6f432" stroke-width="12" stroke-linecap="round"/>
+    <path d="M-60 0C-40 34 40 34 60 0" fill="none" stroke="#c6f432" stroke-width="14" stroke-linecap="round"/>
+    <rect x="-152" y="520" width="304" height="26" fill="#c6f432"/>
+    <text x="0" y="420" text-anchor="middle" font-family="Arial Black, Impact, Helvetica, sans-serif" font-weight="900" font-size="240" fill="#14170f" letter-spacing="-12">10</text>
+    <path d="M-80 120V600M80 120V600" stroke="#000" stroke-opacity=".05" stroke-width="3"/>
+  </g>
+</svg>

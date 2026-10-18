@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 
 export default async function page() {
-  const data = await fetch('https://dummyjson.com/products?limit=30')
+  const data = await fetch('https://dummyjson.com/products?limit=10')
   const products = await data.json()
   return (
    <div className="min-h-screen bg-gray-50 text-gray-800" dir="rtl">

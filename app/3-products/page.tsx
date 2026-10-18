@@ -1,11 +1,32 @@
-import { ShoppingBag, Heart, Star } from "lucide-react";
+
+import { Heart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Button from "./button/button";
 
 
 export default async function Product() {
-  const data = await fetch("https://dummyjson.com/products");
-  const products = await data.json();
+  let products: {
+    products: Array<{
+      id: number;
+      images: string[];
+      rating: number;
+      title: string;
+      price: number;
+    }>;
+  } = { products: [] };
+
+  try{
+
+    const data = await fetch("https://dummyjson.com/products?limit=10");
+    if (!data.ok) {
+          throw new Error(`HTTP error! status: ${data.status}`);
+    }
+    products = await data.json();
+  
+  }catch (err: unknown){
+console.error('Fetch error:', err);
+  }
   return (
     <section className="space-y-6">
       <div className="flex items-center justify-between">
@@ -34,9 +55,9 @@ export default async function Product() {
           return (
             <div
               key={item.id}
-              className="group bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-md hover:shadow-xl transition-shadow group cursor-pointer "
+              className="  group bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-md hover:shadow-xl transition-shadow group cursor-pointer "
               >
-            <Link href={`AllProducts/${item.id}`}>
+            <Link href={`AllProducts/${item.id}`} >
               
               <div className="overflow-hidden relative aspect-square bg-gray-100 flex items-center justify-center text-gray-400 font-medium text-sm">
                 <Image
@@ -58,16 +79,19 @@ export default async function Product() {
                 <h3 className="font-bold text-sm text-gray-800 line-clamp-1">
                   {item.title}
                 </h3>
-                <div className="flex items-center justify-between pt-1">
+               
                   <span className="font-black text-amber-600 text-base">
                     {item.price} ج.م
                   </span>
-                  <button className="bg-gray-100 hover:bg-amber-500 hover:text-white p-2 rounded-xl transition-colors text-gray-700 cursor-pointer">
-                    <ShoppingBag className="w-4 h-4" />
-                  </button>
-                </div>
+               
               </div>
         </Link>
+        <div className="flex justify-between relative  ">
+
+                <div></div>
+                 <Button data={item}/>
+        </div>
+        
             </div>
          );
         })}

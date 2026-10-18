@@ -1,21 +1,26 @@
-
-import Product from "./3-products/page";
-import Hero from "./2-hero/page";
-
-
-
-
+import { MotionProvider } from "@/components/motion-provider";
+import { Navigation } from "@/components/navigation";
+import { HorizonHeroSection } from "@/components/ui/horizon-hero-section";
+import { AboutSection } from "@/app/sections/about";
+import { ContactSection } from "@/app/sections/contact";
+import { SiteFooter } from "@/app/sections/footer";
+import { ProjectsSection } from "@/app/sections/projects";
+import { SkillsSection } from "@/app/sections/skills";
+import { StructuredData } from "@/app/structured-data";
 
 export default function Home() {
   return (
-    <div  className="min-h-screen bg-gray-50 text-gray-800 dir-rtl" dir="rtl">
-
-    <main className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10" >
-  
-    <Hero />
-    <Product />
-    
-    </main>
-    </div>
+    <MotionProvider>
+      <StructuredData />
+      <Navigation />
+      <main>
+        <HorizonHeroSection />
+        <AboutSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <ContactSection />
+      </main>
+      <SiteFooter />
+    </MotionProvider>
   );
 }
