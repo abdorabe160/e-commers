@@ -23,8 +23,8 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteTitle = `${profile.name} | ${profile.role} – Next.js & React Portfolio`;
-const siteDescription = `${profile.name} (${profile.fullName} · ${profile.fullNameAr}) is a ${profile.role.toLowerCase()} with ${profile.yearsOfExperience} years of experience building fast, accessible web apps and e-commerce storefronts with Next.js, React, Tailwind CSS, GSAP and Three.js.`;
+const siteTitle = `${profile.name} | ${profile.role} in ${profile.location} – Next.js & E-commerce Themes`;
+const siteDescription = `${profile.name} (${profile.fullName} · ${profile.fullNameAr}) is a freelance ${profile.role.toLowerCase()} in ${profile.location} with ${profile.yearsOfExperience} years of experience building fast web apps, Arabic RTL e-commerce storefronts and store themes with Next.js, React, Tailwind CSS, GSAP and Three.js. ${profile.roleAr} في ${profile.locationAr}: تصميم وبرمجة متاجر إلكترونية وثيمات متاجر.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
@@ -38,14 +38,41 @@ export const metadata: Metadata = {
     ...profile.alternateNames,
     profile.roleAr,
     `${profile.name} portfolio`,
+    // Role + location
     "front-end developer",
+    "front-end developer Egypt",
+    "freelance front-end developer",
     "frontend developer portfolio",
     "Next.js developer",
+    "Next.js developer Egypt",
+    "hire Next.js developer",
     "React developer",
+    "React developer Egypt",
+    "مطور فرونت اند",
+    "مطور فرونت اند مصر",
+    "مبرمج React",
+    "مطور Next.js",
+    "مبرمج مواقع فريلانس",
+    // Services
     "e-commerce theme developer",
+    "Next.js e-commerce storefront developer",
+    "RTL e-commerce theme",
+    "Qumra theme developer",
+    "landing page developer",
+    "تصميم متجر إلكتروني",
+    "برمجة متجر إلكتروني",
+    "تصميم ثيم متجر",
+    "مطور ثيمات متاجر",
+    "مطور ثيمات قمرة",
+    "متجر عربي RTL",
+    "تصميم واجهات مواقع",
+    "مطور مواقع بأنيميشن",
+    // Stack
     "Tailwind CSS",
     "GSAP",
     "Three.js",
+    "GSAP Three.js animated website developer",
+    "liquid glass UI",
   ],
   authors: [{ name: profile.name, url: profile.siteUrl }],
   creator: profile.name,

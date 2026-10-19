@@ -19,7 +19,9 @@ export function StructuredData() {
         image: `${profile.siteUrl}/profile.jpg`,
         email: `mailto:${profile.email}`,
         sameAs: [profile.github, ...profile.socials.map((social) => social.href)],
-        knowsAbout: [...stack],
+        knowsAbout: [...stack, "E-commerce theme development", "RTL storefronts"],
+        address: { "@type": "PostalAddress", addressCountry: profile.countryCode },
+        homeLocation: { "@type": "Country", name: profile.location },
       },
       {
         "@type": "WebSite",
