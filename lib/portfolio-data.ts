@@ -102,7 +102,7 @@ export const projects: readonly Project[] = [
     description:
       "An RTL lighting store built with Next.js: a lights on/off toggle that swaps every scene from day to night, an ivory and champagne-gold palette, a filterable catalog with search and sorting, and a slide-out cart.",
     tags: ["Next.js", "Day / Night Mode", "RTL", "Responsive UI", "E-commerce"],
-    liveUrl: "https://lamp-store.vercel.app/",
+    liveUrl: "https://lamp-store-one.vercel.app/",
     sourceUrl: "#", // placeholder: your repo link
   },
   {
