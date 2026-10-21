@@ -1,21 +1,17 @@
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import { FashionStore } from "./fashion/fashion-store";
 
-import Product from "./3-products/page";
-import Hero from "./2-hero/page";
-
-
-
-
+const storeFont = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-store",
+  display: "swap",
+});
 
 export default function Home() {
   return (
-    <div  className="min-h-screen bg-gray-50 text-gray-800 dir-rtl" dir="rtl">
-
-    <main className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10" >
-  
-    <Hero />
-    <Product />
-    
-    </main>
+    <div className={storeFont.variable}>
+      <FashionStore />
     </div>
   );
 }

@@ -1,4 +1,573 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@custom-variant dark (&:is(.dark *));
 
+/* ───────────────────────── Design tokens ───────────────────────── */
 
+@theme inline {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Space palette, sampled from the hero's nebula + atmosphere shaders */
+  --color-nebula-blue: var(--nebula-blue);
+  --color-nebula-violet: var(--nebula-violet);
+  --color-nebula-pink: var(--nebula-pink);
+  --color-aurora: var(--aurora);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+
+@theme {
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.8s ease-in-out infinite;
+  --animate-blob: blob 10s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-glow-pan: glow-pan 5s linear infinite;
+  --animate-twinkle: twinkle 6s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-cart-pop: cart-pop 2.8s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes shimmer {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+  @keyframes blob {
+    0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: rotate(0deg); }
+    50% { border-radius: 70% 30% 46% 54% / 30% 39% 61% 70%; transform: rotate(180deg); }
+  }
+  @keyframes glow-pan {
+    to { background-position: 200% center; }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
+  }
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes cart-pop {
+    0%, 70%, 100% { transform: scale(1); }
+    78% { transform: scale(1.35); }
+    86% { transform: scale(0.92); }
+  }
+}
+
+/* The site is dark-only: <html class="dark"> switches shadcn's dark: variants on. */
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.97 0.005 265);
+  --card: oklch(1 0 0 / 0.04);
+  --card-foreground: oklch(0.97 0.005 265);
+  --popover: oklch(0.16 0.02 270);
+  --popover-foreground: oklch(0.97 0.005 265);
+  --primary: oklch(0.72 0.15 262);
+  --primary-foreground: oklch(0.16 0.03 265);
+  --secondary: oklch(1 0 0 / 0.08);
+  --secondary-foreground: oklch(0.97 0.005 265);
+  --muted: oklch(1 0 0 / 0.06);
+  --muted-foreground: oklch(0.74 0.02 265);
+  --accent: oklch(1 0 0 / 0.08);
+  --accent-foreground: oklch(0.97 0.005 265);
+  --destructive: oklch(0.7 0.19 22);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.14);
+  --ring: oklch(0.72 0.15 262);
+
+  --nebula-blue: #6366f1;
+  --nebula-violet: #a78bfa;
+  --nebula-pink: #e879a8;
+  --aurora: #93a5f4;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scrollbar-color: oklch(1 0 0 / 0.2) #000;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  ::selection {
+    background-color: rgb(61 107 255 / 0.45);
+    color: #fff;
+  }
+}
+
+/* ───────────────────────── Utilities ───────────────────────── */
+
+@utility glass {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.03));
+  border: 1px solid rgb(255 255 255 / 0.12);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.1),
+    0 32px 80px -40px rgb(0 0 0 / 0.9),
+    0 0 0 1px rgb(255 255 255 / 0.03);
+}
+
+@utility text-nebula {
+  background-image: linear-gradient(100deg, #a5b4fc 0%, #d8b4fe 40%, #fbc4d8 80%, #a5b4fc 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Same gradient without the looping shimmer — for elements that must stay still. */
+@utility text-nebula-static {
+  background-image: linear-gradient(100deg, #a5b4fc 0%, #d8b4fe 40%, #fbc4d8 80%, #a5b4fc 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Cheap CSS starfield for sections below the WebGL hero (two co-prime tiles avoid a visible grid). */
+@utility starfield {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  &::before {
+    background-image:
+      radial-gradient(1px 1px at 23px 41px, rgb(255 255 255 / 0.7), transparent),
+      radial-gradient(1px 1px at 97px 13px, rgb(255 255 255 / 0.45), transparent),
+      radial-gradient(1.5px 1.5px at 151px 117px, rgb(190 210 255 / 0.85), transparent),
+      radial-gradient(1px 1px at 59px 173px, rgb(255 255 255 / 0.5), transparent),
+      radial-gradient(1px 1px at 199px 71px, rgb(255 200 225 / 0.6), transparent);
+    background-size: 229px 211px;
+  }
+
+  &::after {
+    background-image:
+      radial-gradient(1.5px 1.5px at 67px 89px, rgb(255 255 255 / 0.8), transparent),
+      radial-gradient(1px 1px at 241px 31px, rgb(170 200 255 / 0.7), transparent),
+      radial-gradient(1px 1px at 311px 263px, rgb(255 255 255 / 0.55), transparent),
+      radial-gradient(2px 2px at 157px 331px, rgb(255 255 255 / 0.9), transparent);
+    background-size: 367px 389px;
+    animation: starfield-twinkle 6s ease-in-out infinite;
+  }
+}
+
+@keyframes starfield-twinkle {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* ───────────────────────── Horizon hero ───────────────────────── */
+
+.hero-container {
+  position: relative;
+  background: #000;
+  isolation: isolate;
+}
+
+/* Pinned 3D viewport: stays on screen while the three text sections scroll over it. */
+.hero-viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.hero-viewport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 70%, rgb(0 0 0 / 0.15) 100%);
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Fades the scene into the page background over the last stretch of the hero. */
+.hero-fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  height: 45%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, #000 85%);
+  opacity: clamp(0, calc((var(--hero-progress, 0) - 0.75) * 4), 1);
+}
+
+.side-menu {
+  position: absolute;
+  inset-block: 0;
+  left: clamp(1rem, 2.5vw, 2.5rem);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.side-menu-link {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: rgb(255 255 255 / 0.05);
+  color: rgb(255 255 255 / 0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.side-menu-link:hover,
+.side-menu-link:focus-visible {
+  color: #fff;
+  border-color: rgb(120 160 255 / 0.7);
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: 0 0 28px rgb(61 107 255 / 0.5);
+  transform: translateY(-3px);
+}
+
+.side-menu-line {
+  width: 1px;
+  height: 4rem;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0.45), transparent);
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.6);
+}
+
+.scroll-progress {
+  position: absolute;
+  right: clamp(1rem, 2.5vw, 2.5rem);
+  bottom: clamp(1.25rem, 4vh, 2.5rem);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  color: rgb(255 255 255 / 0.75);
+}
+
+.scroll-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  animation: hero-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes hero-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.progress-track {
+  position: relative;
+  width: 7rem;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.15);
+}
+
+.progress-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform: scaleX(var(--hero-progress, 0));
+  background: linear-gradient(90deg, var(--nebula-blue), var(--nebula-violet), var(--nebula-pink));
+  box-shadow: 0 0 12px rgb(61 107 255 / 0.8);
+}
+
+.section-counter {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+.scroll-sections {
+  position: relative;
+  z-index: 10;
+  margin-top: -100vh;
+  margin-top: -100svh;
+  pointer-events: none; /* let clicks reach the side menu underneath */
+}
+
+.content-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100svh;
+  padding: 6rem 1.5rem;
+  text-align: center;
+}
+
+.hero-content {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 72rem;
+}
+
+/* Backdrop for hero text legibility */
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.8) 0%, rgb(0 0 0 / 0.5) 50%, transparent 80%);
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.75rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.85);
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.5));
+}
+
+.hero-eyebrow::after {
+  transform: scaleX(-1);
+}
+
+.hero-title {
+  margin: 0 0 1.75rem;
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2rem, 8vw, 9.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.title-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.hero-subtitle {
+  font-size: clamp(0.875rem, 1.4vw, 1.35rem);
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: rgb(255 255 255 / 0.9);
+}
+
+.subtitle-line {
+  display: block;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  /* Hide the side menu entirely including its decorative line. */
+  .side-menu,
+  .side-menu-line {
+    display: none;
+  }
+
+  .hero-viewport::after {
+    display: none;
+  }
+
+  .scroll-progress {
+    left: 0;
+    right: 0;
+    justify-content: center;
+  }
+
+  .progress-track {
+    width: 5rem;
+  }
+
+  .hero-eyebrow {
+    letter-spacing: 0.22em;
+    font-size: 0.65rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    width: 1.25rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 9vw, 4rem);
+    white-space: normal;
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: 0.875rem;
+    padding: 0 1rem;
+  }
+
+  .content-section {
+    padding: 4rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(1.5rem, 8vw, 3rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .scroll-text {
+    display: none;
+  }
+
+  .section-counter {
+    font-size: 0.65rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-title {
+    font-size: clamp(2.5rem, 9vw, 6rem);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 7.5rem);
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero-title {
+    font-size: clamp(4rem, 7vw, 9.5rem);
+  }
+}
+
+/* ───────────────────────── Accessibility ───────────────────────── */
+
+/* Motion runs unconditionally on this site (owner's choice), so the OS
+   reduced-motion preference only affects scroll behaviour. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  .hero-viewport {
+    display: none;
+  }
+
+  .scroll-sections {
+    margin-top: 0;
+  }
+}
+
+/* --------------------- Page-level helper animations --------------------- */
+
+.fade-in {
+  animation: fade-in 0.8s ease-out both;
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.8s ease-out both;
+}
+
+.fade-in-up:nth-child(2) { animation-delay: 0.1s; }
+.fade-in-up:nth-child(3) { animation-delay: 0.2s; }
+.fade-in-up:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+:root {
+  --background: #f6f2ea;
+  --foreground: #1b1813;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+}

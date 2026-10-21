@@ -3,9 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
+// Fetch at request time so the build doesn't depend on dummyjson.com being reachable.
+export const dynamic = 'force-dynamic'
+
 export default async function page() {
-  const data = await fetch('https://dummyjson.com/products?limit=30')
-  const products = await data.json()
+  let products: { products: [] } = { products: [] }
+  try {
+    const data = await fetch('https://dummyjson.com/products?limit=10')
+    if (data.ok) products = await data.json()
+  } catch {
+    // Network failure: render the page with an empty list.
+  }
   return (
    <div className="min-h-screen bg-gray-50 text-gray-800" dir="rtl">
       
