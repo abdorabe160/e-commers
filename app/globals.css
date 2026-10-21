@@ -233,6 +233,36 @@
   display: block;
 }
 
+/* Static stand-in for the 3D scene when the browser can't create a WebGL context. */
+.hero-container[data-webgl="off"] .hero-viewport {
+  background:
+    radial-gradient(circle at 18% 18%, rgb(99 102 241 / 0.28), transparent 45%),
+    radial-gradient(circle at 85% 25%, rgb(232 121 168 / 0.18), transparent 42%),
+    #000;
+}
+
+.hero-container[data-webgl="off"] .hero-canvas {
+  display: none;
+}
+
+.hero-container:not([data-webgl="off"]) .hero-fallback-stars {
+  display: none;
+}
+
+.hero-container[data-webgl="off"] .hero-viewport::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  width: 240vmax;
+  height: 240vmax;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #000;
+  border-top: 1px solid rgb(147 165 244 / 0.5);
+  box-shadow: 0 -40px 140px -30px rgb(99 102 241 / 0.7);
+}
+
 /* Fades the scene into the page background over the last stretch of the hero. */
 .hero-fade {
   position: absolute;
@@ -554,20 +584,4 @@
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-:root {
-  --background: #f6f2ea;
-  --foreground: #1b1813;
-}
-
-html {
-  color-scheme: light;
-}
-
-body {
-  min-height: 100vh;
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
 }

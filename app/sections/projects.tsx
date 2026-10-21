@@ -2,18 +2,16 @@ import type { ReactNode } from "react";
 
 import { projects, type Project } from "@/lib/portfolio-data";
 import { ProjectCard } from "./project-card";
-import {
-  ElectronicsStorePreview,
-  MishMavinPreview,
-  SportswearPreview,
-} from "./project-previews";
+import { ProjectCover } from "./project-previews";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
 const previews: Record<Project["slug"], ReactNode> = {
-  "electronics-store-theme": <ElectronicsStorePreview />,
-  "sportswear-theme": <SportswearPreview />,
-  "mish-mavin-theme": <MishMavinPreview />,
+  "lamp-store": <ProjectCover src="/lamp-banner.webp" />,
+  "electronics-store-theme": <ProjectCover src="/electronics-banner.webp" />,
+  "sportswear-theme": <ProjectCover src="/sportswear-banner.webp" />,
+  "mish-mavin-theme": <ProjectCover src="/mish-mavin-banner.webp" />,
+  "fashion-try-on": <ProjectCover src="/products/coat.webp" />,
 };
 
 export function ProjectsSection() {
@@ -36,16 +34,16 @@ export function ProjectsSection() {
             index="02"
             label="Selected Work"
             title="Selected Projects"
-            description="Liquid glass storefront themes I've designed and built, from product listings to checkout flow."
+            description="Storefronts and themes I've designed and built, from product listings to checkout flow."
           />
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((project, index) => (
             <Reveal
               key={project.slug}
               delay={index * 0.12}
-              className="h-full [perspective:1400px] md:last:odd:col-span-2 lg:last:odd:col-span-1"
+              className="h-full [perspective:1400px] md:last:odd:col-span-2"
             >
               <ProjectCard
                 project={project}

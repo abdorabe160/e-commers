@@ -3,10 +3,32 @@
 
 export const profile = {
   name: "Abdo Rabe",
+  fullName: "Abdelrahman Mohamed Rabie",
+  fullNameAr: "عبدالرحمن محمد ربيع",
+  roleAr: "مطور واجهات أمامية",
+  // Other spellings people search for (Arabic, transliterations, nickname, site name).
+  alternateNames: [
+    "Abdelrahman Mohamed Rabie",
+    "Abdelrahman Rabie",
+    "Abdulrahman Mohamed Rabie",
+    "Abdel Rahman Rabie",
+    "Abdo Rabie",
+    "Abdo Rabe",
+    "abdorabe",
+    "عبدالرحمن محمد ربيع",
+    "عبد الرحمن محمد ربيع",
+    "عبدالرحمن ربيع",
+    "عبده ربيع",
+  ],
   initials: "AR",
   role: "Front-End Developer",
   yearsOfExperience: 3,
+  location: "Egypt",
+  locationAr: "مصر",
+  countryCode: "EG",
   email: "abdorabe160@gmail.com",
+  siteUrl: "https://abdorabe.vercel.app",
+  github: "https://github.com/abdorabe160",
   availability: "Open to new opportunities",
   socials: [
     {
@@ -19,7 +41,7 @@ export const profile = {
     },
     {
       label: "WhatsApp",
-      href: "https://wa.me/201096456341",
+      href: "https://wa.me/201030152633",
     },
   ],
   // Optional form backend (Formspree, Getform, Basin, ...). When unset, the
@@ -59,7 +81,7 @@ export const stack = [
 ] as const;
 
 export type Project = {
-  slug: "electronics-store-theme" | "sportswear-theme" | "mish-mavin-theme";
+  slug: "lamp-store" | "electronics-store-theme" | "sportswear-theme" | "mish-mavin-theme" | "fashion-try-on";
   title: string;
   category: string;
   year: string;
@@ -71,6 +93,29 @@ export type Project = {
 };
 
 export const projects: readonly Project[] = [
+  {
+    slug: "fashion-try-on",
+    title: "3D Fashion Try-On",
+    category: "E-commerce Storefront",
+    year: "2026",
+    summary: "An Arabic fashion store where 3D characters try on every piece you pick.",
+    description:
+      "A Three.js storefront with male and female 3D characters: every garment is fitted on the body itself, layers over what's already worn, and moves with the character as it stands, walks and puts the clothes on.",
+    tags: ["Three.js", "3D", "Next.js", "RTL", "E-commerce"],
+    liveUrl: "/fashion",
+  },
+  {
+    slug: "lamp-store",
+    title: "Lamp Lighting Store",
+    category: "E-commerce Storefront",
+    year: "2026",
+    summary: "A premium Arabic storefront for home LED lighting with a day/night mode.",
+    description:
+      "An RTL lighting store built with Next.js: a lights on/off toggle that swaps every scene from day to night, an ivory and champagne-gold palette, a filterable catalog with search and sorting, and a slide-out cart.",
+    tags: ["Next.js", "Day / Night Mode", "RTL", "Responsive UI", "E-commerce"],
+    liveUrl: "https://lamp-store-one.vercel.app/",
+    sourceUrl: "#", // placeholder: your repo link
+  },
   {
     slug: "electronics-store-theme",
     title: "Electronics Store Theme",

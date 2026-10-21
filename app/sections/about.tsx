@@ -73,7 +73,8 @@ export function AboutSection() {
           <Reveal direction="right" className="lg:col-span-8">
             <div className="glass h-full rounded-3xl p-7 sm:p-10">
               <p className="text-lg leading-relaxed text-white/90 sm:text-xl">
-                I&apos;m {profile.name}, a {profile.role.toLowerCase()} with{" "}
+                I&apos;m {profile.fullName} ({profile.name}), a{" "}
+                {profile.role.toLowerCase()} with{" "}
                 <span className="font-semibold text-white">
                   {profile.yearsOfExperience} years of experience
                 </span>{" "}

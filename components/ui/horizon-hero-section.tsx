@@ -66,12 +66,29 @@ const splitTitle = (text: string) =>
     </span>
   ));
 
-export const Component = () => {
+export // Probe on a throwaway canvas so a disabled GPU doesn't make three.js log an error.
+// Software renderers (SwiftShader, llvmpipe) run the scene on the CPU and freeze the
+// page, so they get the static backdrop too.
+function canUseWebGL() {
+  try {
+    const probe = document.createElement("canvas");
+    const gl = probe.getContext("webgl2") ?? probe.getContext("webgl");
+    if (!gl) return false;
+    const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = debugInfo ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)) : "";
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return !/swiftshader|llvmpipe|softpipe|software/i.test(renderer);
+  } catch {
+    return false;
+  }
+}
+
+const Component = () => {
   const containerRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
   const scrollProgressRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLElement>(null);
@@ -416,7 +433,7 @@ export const Component = () => {
     };
 
     const start = () => {
-      if (refs.animationId === null && refs.composer) animate();
+      if (!contextLost && refs.animationId === null && refs.composer) animate();
     };
 
     const stop = () => {
@@ -426,11 +443,31 @@ export const Component = () => {
       }
     };
 
-    try {
-      initThree();
-      start();
-    } catch (error) {
-      console.warn("[HorizonHero] WebGL unavailable, skipping the 3D scene.", error);
+    // Flag the container so CSS swaps the canvas for a static backdrop.
+    const showFallback = () => {
+      container.dataset.webgl = "off";
+    };
+
+    // A lost context (GPU reset/disabled) must not restart the render loop.
+    let contextLost = false;
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      contextLost = true;
+      stop();
+      showFallback();
+    };
+    canvas.addEventListener("webglcontextlost", handleContextLost);
+
+    if (canUseWebGL()) {
+      try {
+        initThree();
+        start();
+      } catch (error) {
+        console.warn("[HorizonHero] WebGL unavailable, showing the static backdrop.", error);
+        showFallback();
+      }
+    } else {
+      showFallback();
     }
 
     setIsReady(true);
@@ -474,6 +511,8 @@ export const Component = () => {
 
       refs.bloomPass?.dispose();
       refs.composer?.dispose();
+      canvas.removeEventListener("webglcontextlost", handleContextLost);
+      // No forceContextLoss(): the canvas (and its single context) is reused on remount.
       refs.renderer?.dispose();
 
       Object.assign(refs, {
@@ -519,11 +558,6 @@ export const Component = () => {
           });
         }
 
-        tl.from(
-          ".hero-eyebrow",
-          { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" },
-          "-=0.6"
-        );
 
         if (titleRef.current) {
           tl.from(
@@ -676,6 +710,7 @@ export const Component = () => {
     >
       <div ref={viewportRef} className="hero-viewport">
         <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
+        <div className="starfield hero-fallback-stars" aria-hidden="true" />
         <div className="hero-fade" aria-hidden="true" />
         <div
           className="hero-backdrop"
@@ -742,14 +777,16 @@ export const Component = () => {
                   className="hero-content"
                   style={{ visibility: "hidden" }}
                 >
-                  <p className="hero-eyebrow">
-                    {profile.name} &middot; {profile.yearsOfExperience} years of
-                    craft
-                  </p>
-                  <h1 ref={titleRef} className="hero-title">
+                  {/* The page's h1 carries the name and role for search engines; the big word is decorative. */}
+                  {/* Visible straight from the server HTML (it's the LCP element), unlike the
+                      rest of the intro which waits for the GSAP reveal. */}
+                  <h1 className="hero-eyebrow" style={{ visibility: "visible" }}>
+                    {profile.name} &middot; {profile.role}
+                  </h1>
+                  <p ref={titleRef} className="hero-title">
                     <span className="sr-only">{titles[i]}</span>
                     {splitTitle(titles[i])}
-                  </h1>
+                  </p>
                   <div ref={subtitleRef} className="hero-subtitle">
                     <p className="subtitle-line">{subtitles[i].line1}</p>
                     <p className="subtitle-line">{subtitles[i].line2}</p>

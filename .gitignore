@@ -41,7 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
-.env*
 
-# windows folder settings
+# local-only files
 desktop.ini
+security_best_practices_report.md

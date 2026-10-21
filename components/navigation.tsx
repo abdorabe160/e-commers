@@ -107,8 +107,11 @@ export function Navigation() {
           aria-label={`${profile.name}, back to top`}
         >
           <img
-            src="/profile.webp"
+            src="/avatar.webp"
             alt={profile.name}
+            width={40}
+            height={40}
+            fetchPriority="high"
             className="size-10 rounded-full object-cover ring-2 ring-white/20"
           />
           <span className="hidden font-display text-sm font-semibold tracking-wide text-white sm:block">

@@ -86,8 +86,8 @@ export function ProjectCard({ project, index, preview }: ProjectCardProps) {
         rotY(px * 11);
         rotX(-py * 9);
         lift(-6);
-        previewX(-px * 16);
-        previewY(-py * 12);
+        previewX(-px * 6);
+        previewY(-py * 4);
         contentX(px * 6);
       };
 
@@ -146,9 +146,9 @@ export function ProjectCard({ project, index, preview }: ProjectCardProps) {
       /* ── 5. Scroll-scrubbed parallax inside the preview window ── */
       gsap.fromTo(
         depth,
-        { yPercent: -5 },
+        { yPercent: -1 },
         {
-          yPercent: 5,
+          yPercent: 1,
           ease: "none",
           scrollTrigger: {
             trigger: card,
@@ -209,13 +209,13 @@ export function ProjectCard({ project, index, preview }: ProjectCardProps) {
       <div className="relative p-3 pb-0">
         <div
           role="img"
-          aria-label={`Illustrated preview of the ${project.title} interface`}
-          className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-[#0b0a10]"
+          aria-label={`Banner of the ${project.title} interface`}
+          className="relative aspect-[5/2] overflow-hidden rounded-2xl border border-white/10 bg-[#0b0a10]"
         >
           {/* Hover parallax layer */}
           <div ref={previewRef} className="absolute inset-0">
-            {/* Scroll-scrub layer, oversized so parallax never shows edges */}
-            <div ref={depthRef} className="absolute -inset-[7%]">
+            {/* Scroll-scrub layer, slightly oversized so parallax never shows edges without cropping banner text */}
+            <div ref={depthRef} className="absolute -inset-[2%]">
               {preview}
             </div>
           </div>
