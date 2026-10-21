@@ -7,12 +7,10 @@ import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
 const previews: Record<Project["slug"], ReactNode> = {
-  "decafe-coffee-theme": <ProjectCover src="/coffee-banner.webp" />,
   "lamp-store": <ProjectCover src="/lamp-banner.webp" />,
   "electronics-store-theme": <ProjectCover src="/electronics-banner.webp" />,
   "sportswear-theme": <ProjectCover src="/sportswear-banner.webp" />,
   "mish-mavin-theme": <ProjectCover src="/mish-mavin-banner.webp" />,
-  "fashion-try-on": <ProjectCover src="/products/coat.webp" />,
 };
 
 export function ProjectsSection() {

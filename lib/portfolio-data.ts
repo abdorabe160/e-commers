@@ -81,13 +81,7 @@ export const stack = [
 ] as const;
 
 export type Project = {
-  slug:
-    | "decafe-coffee-theme"
-    | "lamp-store"
-    | "electronics-store-theme"
-    | "sportswear-theme"
-    | "mish-mavin-theme"
-    | "fashion-try-on";
+  slug: "lamp-store" | "electronics-store-theme" | "sportswear-theme" | "mish-mavin-theme";
   title: string;
   category: string;
   year: string;
@@ -99,29 +93,6 @@ export type Project = {
 };
 
 export const projects: readonly Project[] = [
-  {
-    slug: "decafe-coffee-theme",
-    title: "DECAFE Coffee Theme",
-    category: "E-commerce Theme",
-    year: "2026",
-    summary: "A premium specialty coffee store theme with a dark, warm roastery feel.",
-    description:
-      "A specialty coffee storefront for Qumra Cloud: a cinematic pour-over hero, shop-by-category cards, a farm-to-cup coffee journey, product quick view, and a coffee journal, all in Arabic and English with full RTL support.",
-    tags: ["Theme Development", "Tailwind CSS", "Alpine.js", "RTL", "Bilingual"],
-    liveUrl: "https://coffee.qumra.store/",
-    sourceUrl: "#", // placeholder: your repo link
-  },
-  {
-    slug: "fashion-try-on",
-    title: "3D Fashion Try-On",
-    category: "E-commerce Storefront",
-    year: "2026",
-    summary: "An Arabic fashion store where 3D characters try on every piece you pick.",
-    description:
-      "A Three.js storefront with male and female 3D characters: every garment is fitted on the body itself, layers over what's already worn, and moves with the character as it stands, walks and puts the clothes on.",
-    tags: ["Three.js", "3D", "Next.js", "RTL", "E-commerce"],
-    liveUrl: "/fashion",
-  },
   {
     slug: "lamp-store",
     title: "Lamp Lighting Store",

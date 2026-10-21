@@ -335,11 +335,6 @@ export const HorizonHero = () => {
       refs.scene.add(atmosphere);
     };
 
-    const getLocation = () => {
-      const { current: refs } = threeRefs;
-      refs.locations = refs.mountains.map((mountain) => mountain.position.z);
-    };
-
     const animate = () => {
       const { current: refs } = threeRefs;
       refs.animationId = requestAnimationFrame(animate);
@@ -432,6 +427,15 @@ export const HorizonHero = () => {
       }
     };
   }, []);
+
+  const getLocation = () => {
+    const { current: refs } = threeRefs;
+    const locations: number[] = [];
+    refs.mountains.forEach((mountain) => {
+      locations.push(mountain.position.z);
+    });
+    refs.locations = locations;
+  };
 
   useEffect(() => {
     if (!isReady) return;
