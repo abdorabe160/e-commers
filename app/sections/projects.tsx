@@ -7,6 +7,7 @@ import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
 const previews: Record<Project["slug"], ReactNode> = {
+  "velora-desserts": <ProjectCover src="/velora-banner.webp" />,
   "lamp-store": <ProjectCover src="/lamp-banner.webp" />,
   "electronics-store-theme": <ProjectCover src="/electronics-banner.webp" />,
   "sportswear-theme": <ProjectCover src="/sportswear-banner.webp" />,

@@ -81,7 +81,12 @@ export const stack = [
 ] as const;
 
 export type Project = {
-  slug: "lamp-store" | "electronics-store-theme" | "sportswear-theme" | "mish-mavin-theme";
+  slug:
+    | "velora-desserts"
+    | "lamp-store"
+    | "electronics-store-theme"
+    | "sportswear-theme"
+    | "mish-mavin-theme";
   title: string;
   category: string;
   year: string;
@@ -93,6 +98,18 @@ export type Project = {
 };
 
 export const projects: readonly Project[] = [
+  {
+    slug: "velora-desserts",
+    title: "Velora Artisan Desserts",
+    category: "E-commerce Storefront",
+    year: "2026",
+    summary: "A luxury dessert boutique where five desserts sit on one turning table.",
+    description:
+      "A dark, editorial patisserie store built with Next.js: scrolling turns a wooden table to bring each dessert forward, you can drag to look around it, and every dessert opens into its own story, ingredients, and order button.",
+    tags: ["Next.js", "Scroll Animation", "Interactive UI", "Responsive UI", "E-commerce"],
+    liveUrl: "https://velora-desserts.vercel.app/",
+    sourceUrl: "#", // placeholder: your repo link
+  },
   {
     slug: "lamp-store",
     title: "Lamp Lighting Store",
