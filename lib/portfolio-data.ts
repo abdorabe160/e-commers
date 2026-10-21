@@ -81,7 +81,13 @@ export const stack = [
 ] as const;
 
 export type Project = {
-  slug: "lamp-store" | "electronics-store-theme" | "sportswear-theme" | "mish-mavin-theme" | "fashion-try-on";
+  slug:
+    | "decafe-coffee-theme"
+    | "lamp-store"
+    | "electronics-store-theme"
+    | "sportswear-theme"
+    | "mish-mavin-theme"
+    | "fashion-try-on";
   title: string;
   category: string;
   year: string;
@@ -93,6 +99,18 @@ export type Project = {
 };
 
 export const projects: readonly Project[] = [
+  {
+    slug: "decafe-coffee-theme",
+    title: "DECAFE Coffee Theme",
+    category: "E-commerce Theme",
+    year: "2026",
+    summary: "A premium specialty coffee store theme with a dark, warm roastery feel.",
+    description:
+      "A specialty coffee storefront for Qumra Cloud: a cinematic pour-over hero, shop-by-category cards, a farm-to-cup coffee journey, product quick view, and a coffee journal, all in Arabic and English with full RTL support.",
+    tags: ["Theme Development", "Tailwind CSS", "Alpine.js", "RTL", "Bilingual"],
+    liveUrl: "https://coffee.qumra.store/",
+    sourceUrl: "#", // placeholder: your repo link
+  },
   {
     slug: "fashion-try-on",
     title: "3D Fashion Try-On",
