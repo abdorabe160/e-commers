@@ -41,7 +41,7 @@ export const profile = {
     },
     {
       label: "WhatsApp",
-      href: "https://wa.me/201096456341",
+      href: "https://wa.me/201030152633",
     },
   ],
   // Optional form backend (Formspree, Getform, Basin, ...). When unset, the
