@@ -83,6 +83,7 @@ export const stack = [
 export type Project = {
   slug:
     | "fashion-try-on"
+    | "decafe-coffee-theme"
     | "velora-desserts"
     | "lamp-store"
     | "electronics-store-theme"
@@ -109,6 +110,18 @@ export const projects: readonly Project[] = [
       "A Three.js storefront with realistic male and female characters: each garment is fitted on the body, layers over what's already worn, and moves with the character as it stands, walks and puts the clothes on.",
     tags: ["Three.js", "3D", "Next.js", "RTL", "E-commerce"],
     liveUrl: "https://fashion-try-on-eight.vercel.app/",
+    sourceUrl: "#", // placeholder: your repo link
+  },
+  {
+    slug: "decafe-coffee-theme",
+    title: "DECAFE Coffee Theme",
+    category: "E-commerce Theme",
+    year: "2026",
+    summary: "A premium specialty coffee store theme with a dark, warm roastery feel.",
+    description:
+      "A specialty coffee storefront for Qumra Cloud: a cinematic pour-over hero, shop-by-category cards, a farm-to-cup coffee journey, product quick view, and a coffee journal, all in Arabic and English with full RTL support.",
+    tags: ["Theme Development", "Tailwind CSS", "Alpine.js", "RTL", "Bilingual"],
+    liveUrl: "https://coffee.qumra.store/",
     sourceUrl: "#", // placeholder: your repo link
   },
   {

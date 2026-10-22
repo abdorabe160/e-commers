@@ -8,6 +8,7 @@ import { SectionHeading } from "./section-heading";
 
 const previews: Record<Project["slug"], ReactNode> = {
   "fashion-try-on": <ProjectCover src="/fashion-banner.webp" />,
+  "decafe-coffee-theme": <ProjectCover src="/coffee-banner.webp" />,
   "velora-desserts": <ProjectCover src="/velora-banner.webp" />,
   "lamp-store": <ProjectCover src="/lamp-banner.webp" />,
   "electronics-store-theme": <ProjectCover src="/electronics-banner.webp" />,
