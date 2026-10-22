@@ -82,6 +82,7 @@ export const stack = [
 
 export type Project = {
   slug:
+    | "fashion-try-on"
     | "velora-desserts"
     | "lamp-store"
     | "electronics-store-theme"
@@ -98,6 +99,18 @@ export type Project = {
 };
 
 export const projects: readonly Project[] = [
+  {
+    slug: "fashion-try-on",
+    title: "3D Fashion Try-On",
+    category: "E-commerce Storefront",
+    year: "2026",
+    summary: "An Arabic fashion store where 3D characters try on every piece you pick.",
+    description:
+      "A Three.js storefront with realistic male and female characters: each garment is fitted on the body, layers over what's already worn, and moves with the character as it stands, walks and puts the clothes on.",
+    tags: ["Three.js", "3D", "Next.js", "RTL", "E-commerce"],
+    liveUrl: "https://fashion-try-on-eight.vercel.app/",
+    sourceUrl: "#", // placeholder: your repo link
+  },
   {
     slug: "velora-desserts",
     title: "Velora Artisan Desserts",
